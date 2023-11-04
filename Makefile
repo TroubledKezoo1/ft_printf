@@ -1,51 +1,39 @@
-NAME	= libftprintf.a
-LIBFTNAME = libft.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ysarac <yunusemresarac@yaani.com>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/03 14:21:17 by ysarac            #+#    #+#              #
+#    Updated: 2023/11/03 14:30:03 by ysarac           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC		= cc
-FLAGS	= -Wall -Wextra -Werror
+NAME = libftprintf.a
 
-RM		= rm -f
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+RM = rm -f
+AR = ar rcs
+SRC = ft_printf.c
 
-AR		= ar rc
-
-LIBFTDIR = ./Libft
-
-SRC		= ft_printf.c \
-
-OBJ		= $(SRC:%.c=%.o)
-
-CP		= cp
-
-CD		= cd
-
-MV		= mv
-
-MAKE	= make
-
-MAKEBONUS = bonus
-
-makelibft:
-		@$(MAKE) -C $(LIBFTDIR)
-		@$(CP) $(LIBFTDIR)/$(LIBFTNAME) ./$(LIBFTNAME)
-		@$(MV) $(LIBFTNAME) $(NAME)
-
-$(NAME):
-	makelibft
-	@$(CC) $(FLAGS) -c $(SRC)
-	@$(AR) $(NAME) $(OBJ)
+OBJ = $(SRC:%.c=%.o)
 
 all: $(NAME)
 
-clean:
-	@$(RM) $(OBJ)
-	@$(CD) $(LIBFTDIR) && $(MAKE) clean
+$(NAME):
+	$(CC) $(CFLAGS) -c $(SRC)
+	$(AR) $(NAME) $(OBJ)
 
+c:clean
+clean:
+	$(RM) $(OBJ)
+
+fc:fclean	
 fclean: clean
-	@$(RM) $(NAME)
-	@$(CD) $(LIBFTDIR) && $(MAKE) fclean
+	$(RM) $(OBJ) $(NAME)
 
 re: fclean all
 
-
-
-
+.PHONY: all clean fclean re
